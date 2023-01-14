@@ -14,7 +14,7 @@ The main benefit for me is the ability to use letsencrypt with certbot + dns cha
 ## Run
 ### Run using docker (using env var)
 ```shell
-docker run --rm -it --env-file ~/git/tailscale-cloudflare-dnssync/env.txt ghcr.io/marc1307/tailscale-cloudflare-dnssync:latest
+docker run --rm -it --env-file ~/git/tailscale-cloudflare-dnssync/env.txt ghcr.io/sandels-hq/tailscale-cloudflare-dnssync:latest
 ```
 Envfile:
 ```env
