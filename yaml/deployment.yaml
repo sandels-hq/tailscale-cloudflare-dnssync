@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sync
+  namespace: tailscale-cloudflare-dnssync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sync
+  template:
+    metadata:
+      labels:
+        app: sync
+    spec:
+      containers:
+        - name: sync
+          image: ghcr.io/sandels-hq/tailscale-cloudflare-dnssync:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "10m"
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+          env:
+            - name: cf-domain
+              valueFrom:
+                configMapKeyRef:
+                  name: sync
+                  key: cf-domain
+            - name: cf-sub
+              valueFrom:
+                configMapKeyRef:
+                  name: sync
+                  key: cf-sub
+            # - name: prefix
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sync
+            #       key: prefix
+            # - name: postfix
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sync
+            #       key: postfix
+            - name: ts-tailnet
+              valueFrom:
+                configMapKeyRef:
+                  name: sync
+                  key: ts-tailnet
+            - name: cf-key
+              valueFrom:
+                secretKeyRef:
+                  name: sync
+                  key: cf-key
+            - name: ts-key
+              valueFrom:
+                secretKeyRef:
+                  name: sync
+                  key: ts-key                  

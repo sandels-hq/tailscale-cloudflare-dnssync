@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sync
+  namespace: tailscale-cloudflare-dnssync
+data:
+  cf-domain: <cloudflare domain>
+  cf-sub: ts # <subdomain to use, optional>
+  ts-tailnet: <tailnet>
+  # prefix: <prefix for dns records, optional>
+  # postfix: <postfix for dns records, optional>  
